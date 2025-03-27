@@ -24,17 +24,19 @@ public class Main extends ApplicationAdapter {
 	@Override
 	public void create() {
 		batch = new SpriteBatch();
+	    image = new Texture("starzinger-ii-850-1.jpg");
+	    enemyImage = new Texture("starzinger_enemy.jpg");
 
-		image = new Texture("starzinger-ii-850-1.jpg");
-		enemyImage = new Texture("starzinger_enemy.jpg");
+	    // Start hero near bottom-left
+	    x = 50;
+	    y = 50;
 
-		// Center player on screen
-		x = (Gdx.graphics.getWidth() - image.getWidth()) / 2f;
-		y = (Gdx.graphics.getHeight() - image.getHeight()) / 2f;
+	    // Center the enemy
+	    enemyX = (Gdx.graphics.getWidth() - enemyImage.getWidth()) / 2f;
+	    enemyY = (Gdx.graphics.getHeight() - enemyImage.getHeight()) / 2f;
 
-		// Initialize rectangles
-		playerRect = new Rectangle(x, y, image.getWidth(), image.getHeight());
-		enemyRect = new Rectangle(); // we'll set position dynamically in render()
+	    playerRect = new Rectangle(x, y, image.getWidth(), image.getHeight());
+	    enemyRect = new Rectangle(enemyX, enemyY, enemyImage.getWidth(), enemyImage.getHeight());
 		
 		collisionSound = Gdx.audio.newSound(Gdx.files.internal("collision.wav"));
 
