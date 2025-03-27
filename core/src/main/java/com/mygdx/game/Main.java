@@ -7,6 +7,8 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.audio.Sound;
+
 
 public class Main extends ApplicationAdapter {
 	private SpriteBatch batch;
@@ -16,6 +18,8 @@ public class Main extends ApplicationAdapter {
 	private float enemyX, enemyY;
 	private Rectangle playerRect;
 	private Rectangle enemyRect;
+	private Sound collisionSound;
+
 
 	@Override
 	public void create() {
@@ -31,6 +35,9 @@ public class Main extends ApplicationAdapter {
 		// Initialize rectangles
 		playerRect = new Rectangle(x, y, image.getWidth(), image.getHeight());
 		enemyRect = new Rectangle(); // we'll set position dynamically in render()
+		
+		collisionSound = Gdx.audio.newSound(Gdx.files.internal("collision.wav"));
+
 	}
 
 	@Override
@@ -62,6 +69,8 @@ public class Main extends ApplicationAdapter {
 		// Collision check
 		if (playerRect.overlaps(enemyRect)) {
 			System.out.println("💥 Collision Detected!");
+			collisionSound.play();
+
 		}
 
 		// ESC key: reset to windowed mode
@@ -82,5 +91,7 @@ public class Main extends ApplicationAdapter {
 		batch.dispose();
 		image.dispose();
 		enemyImage.dispose();
+		collisionSound.dispose();
+
 	}
 }
