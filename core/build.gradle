@@ -1,0 +1,21 @@
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+eclipse.project.name = appName + '-core'
+
+ext {
+    gdxVersion = '1.13.1'  // Ensure this matches the version you want
+}
+
+apply plugin: 'java'
+
+allprojects {
+    apply plugin: 'eclipse'
+}
+
+dependencies {
+  api "com.badlogicgames.gdx:gdx:$gdxVersion"
+    
+
+  if(enableGraalNative == 'true') {
+    implementation "io.github.berstanio:gdx-svmhelper-annotations:$graalHelperVersion"
+  }
+}
